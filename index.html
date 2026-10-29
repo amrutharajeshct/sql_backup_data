@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Knowledge Hub</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">SQL</div>
+    <div>
+      <h1>SQL Knowledge Hub</h1>
+      <p>Your personal library for queries, fixes and work notes</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="stats">
+      <div class="stat-card"><span id="totalCount">0</span><small>Saved items</small></div>
+      <div class="stat-card"><span id="favoriteCount">0</span><small>Favorites</small></div>
+      <div class="stat-card"><span id="categoryCount">0</span><small>Categories</small></div>
+    </section>
+
+    <section class="toolbar">
+      <input id="searchInput" type="search" placeholder="Search title, code, table, tag or error...">
+      <select id="categoryFilter" aria-label="Filter by category">
+        <option value="">All categories</option>
+      </select>
+      <label class="favorite-filter"><input type="checkbox" id="favoritesOnly"> Favorites only</label>
+    </section>
+
+    <div class="main-grid">
+      <section class="panel editor-panel">
+        <div class="panel-heading">
+          <div>
+            <h2 id="formHeading">Add a saved item</h2>
+            <p>Save a query, procedure, error fix or work note.</p>
+          </div>
+          <button id="resetFormBtn" class="button button-quiet" type="button">Clear</button>
+        </div>
+
+        <form id="queryForm">
+          <input type="hidden" id="itemId">
+          <label for="titleInput">Title <span class="required">*</span></label>
+          <input id="titleInput" maxlength="120" required placeholder="e.g. Find duplicate customer records">
+
+          <div class="two-col">
+            <div>
+              <label for="categoryInput">Category</label>
+              <select id="categoryInput">
+                <option>SQL Queries</option>
+                <option>Stored Procedures</option>
+                <option>Performance Tuning</option>
+                <option>Debugging & Error Fixes</option>
+                <option>Reports & Data Analysis</option>
+                <option>Daily Work Notes</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="databaseInput">Database / tool</label>
+              <select id="databaseInput">
+                <option>General SQL</option>
+                <option>MySQL</option>
+                <option>MariaDB</option>
+                <option>SQL Server / T-SQL</option>
+                <option>HeidiSQL</option>
+                <option>SSMS</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="tagsInput">Tags <span class="muted">(comma-separated)</span></label>
+          <input id="tagsInput" placeholder="JOIN, duplicates, customer">
+
+          <label for="descriptionInput">Description / solution</label>
+          <textarea id="descriptionInput" rows="3" placeholder="What does this do? When should you use it? What fixed the issue?"></textarea>
+
+          <label for="codeInput">SQL code or notes</label>
+          <textarea id="codeInput" class="code-input" rows="9" spellcheck="false" placeholder="Paste your SQL code here..."></textarea>
+
+          <label class="favorite-toggle"><input id="favoriteInput" type="checkbox"> Add to favorites</label>
+          <div class="form-actions">
+            <button class="button button-primary" type="submit" id="saveBtn">Save item</button>
+            <button class="button button-secondary" type="button" id="sampleBtn">Load sample</button>
+          </div>
+          <p class="privacy-note">Keep company code, customer data, credentials and production details out of personal notes unless your employer permits it. Use sanitized examples.</p>
+        </form>
+      </section>
+
+      <section class="library-section">
+        <div class="library-heading">
+          <div>
+            <h2>Your library</h2>
+            <p id="resultsLabel">0 items</p>
+          </div>
+          <div class="backup-actions">
+            <button id="exportBtn" class="button button-secondary" type="button">Export backup</button>
+            <button id="importBtn" class="button button-secondary" type="button">Import backup</button>
+            <input id="importFile" type="file" accept=".json,application/json" hidden>
+          </div>
+        </div>
+        <div id="queryList" class="query-list"></div>
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">⌕</div>
+          <h3>No saved items yet</h3>
+          <p>Add your first query using the form. You can also load a sample to try the features.</p>
+        </div>
+      </section>
+    </div>
+    <footer>Saved in this browser on this device · Export backups regularly</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
